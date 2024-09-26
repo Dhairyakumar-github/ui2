@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CountryScreen extends StatefulWidget {
-  const CountryScreen({super.key});
+  final int selectedCountryIndex;
+  const CountryScreen({super.key, required this.selectedCountryIndex});
 
   @override
   State<CountryScreen> createState() => _CountryScreenState();
@@ -30,7 +31,16 @@ class _CountryScreenState extends State<CountryScreen> {
     "China",
     "Cuba"
   ];
-  int selectedIndex = 0;
+
+  late int selectedCountryIndex; // Initialize selectedIndex
+
+  @override
+  void initState() {
+    super.initState();
+    // Set selectedIndex to the value passed from the previous screen
+    selectedCountryIndex = widget.selectedCountryIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +48,7 @@ class _CountryScreenState extends State<CountryScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: SizedBox(
@@ -50,23 +58,24 @@ class _CountryScreenState extends State<CountryScreen> {
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Icon(
                             Icons.arrow_back_ios_new_rounded,
                             color: Colors.white,
                             size: 18,
                           ),
+                          SizedBox(width: 10),
                           SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Language",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            child: Text(
+                              "Country",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ],
@@ -97,9 +106,7 @@ class _CountryScreenState extends State<CountryScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             // ListView to show the languages
             Expanded(
               child: ListView.separated(
@@ -109,26 +116,24 @@ class _CountryScreenState extends State<CountryScreen> {
                     onTap: () {
                       // Update selected index and pass the value back
                       setState(() {
-                        selectedIndex = index;
+                        selectedCountryIndex = index;
                       });
-                      // Pass the selected language back to the previous screen
-                      Navigator.pop(context, data);
+                      // Pass the selected language and index back to the previous screen
+                      Navigator.pop(context,
+                          {'country': data, 'index2': selectedCountryIndex});
                     },
-                    child: SizedBox(
-                      height: 40,
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          data,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: selectedIndex == index
-                                ? Colors.blue // Highlight selected language
-                                : const Color.fromARGB(
-                                    255, 122, 119, 119), // Default color
-                          ),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        data,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: selectedCountryIndex == index
+                              ? const Color.fromARGB(255, 255, 255, 255)
+                              : const Color.fromARGB(255, 122, 119, 119),
                         ),
                       ),
                     ),
@@ -144,6 +149,5 @@ class _CountryScreenState extends State<CountryScreen> {
         ),
       ),
     );
-    ;
   }
 }

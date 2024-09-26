@@ -60,7 +60,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Icon(
                             Icons.arrow_back_ios_new_rounded,
@@ -68,13 +68,16 @@ class _LanguageScreenState extends State<LanguageScreen> {
                             size: 18,
                           ),
                           SizedBox(width: 10),
-                          Text(
-                            "Language",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            child: Text(
+                              "Language",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ],
@@ -123,11 +126,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     },
                     child: Container(
                       alignment: Alignment.centerLeft,
-                      color: selectedIndex == index
-                          ? Colors.blue.withOpacity(
-                              0.3) // Highlight color for selected language
-                          : Colors
-                              .transparent, // Default color for unselected items
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
                         data,
@@ -136,9 +134,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         style: TextStyle(
                           fontSize: 20,
                           color: selectedIndex == index
-                              ? Colors.blue // Highlight text color
-                              : const Color.fromARGB(
-                                  255, 122, 119, 119), // Default text color
+                              ? const Color.fromARGB(255, 255, 255, 255)
+                              : const Color.fromARGB(255, 122, 119, 119),
                         ),
                       ),
                     ),

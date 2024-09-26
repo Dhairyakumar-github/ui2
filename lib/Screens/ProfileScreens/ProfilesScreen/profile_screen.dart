@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ui2/Screens/ProfileScreens/CountryScreen/country_screen.dart';
 import 'package:ui2/Screens/ProfileScreens/EditProfileScreen/edit_profile_screen.dart';
 import 'package:ui2/Screens/ProfileScreens/LanguageScreen.dart/language_screen.dart';
-import 'package:ui2/Screens/ProfileScreens/ProfilesScreen/switchClass.dart';
+import 'package:ui2/Screens/ProfileScreens/LocationScreen/location_screen.dart';
+import 'package:ui2/Screens/ProfileScreens/ProfilesScreen/widgits/switchClass.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -15,7 +17,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool notificationvalue = true;
   String selectedLanguage = 'English';
   int selectedIndex = 0;
-
+  int selectedCountryIndex = 0;
+  String selectedCountry = "Australia";
+  bool status = false;
+  bool status2 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,12 +181,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                "Language",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.white),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                child: const Text(
+                                  "Language",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white),
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () async {
@@ -205,15 +215,201 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   }
                                 },
                                 child: Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      "$selectedLanguage",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white),
+                                    Container(
+                                      alignment: Alignment.centerRight,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        "$selectedLanguage",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white),
+                                      ),
                                     ),
-                                    Icon(
+                                    SizedBox(
+                                      width: 20,
+                                      child: const Icon(
+                                        Icons.arrow_forward_ios_outlined,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              LocationScreen()));
+                                },
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: const Text(
+                                    "Location",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 35,
+                                child: CustomSwitch(
+                                  activeColor: Colors.pinkAccent,
+                                  value: status,
+                                  onChanged: (value) {
+                                    print("VALUE : $value");
+                                    setState(() {
+                                      status = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                child: const Text(
+                                  "Notification",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 35,
+                                // width: ,
+                                child: CustomSwitch(
+                                  activeColor: Colors.pinkAccent,
+                                  value: status2,
+                                  onChanged: (value2) {
+                                    print("VALUE : $value2");
+                                    setState(() {
+                                      status2 = value2;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                child: const Text(
+                                  "Country",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  final countryResult = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CountryScreen(
+                                        selectedCountryIndex:
+                                            selectedCountryIndex,
+                                      ),
+                                    ),
+                                  );
+
+                                  // If a language is selected, update the selectedLanguage
+                                  if (countryResult != null) {
+                                    setState(
+                                      () {
+                                        selectedCountry = countryResult[
+                                            'country']; // Update selected language
+                                        selectedCountryIndex = countryResult[
+                                            'index2']; // Update selected index
+                                      },
+                                    );
+                                  }
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerRight,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        "$selectedCountry",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    const Icon(
                                       Icons.arrow_forward_ios_outlined,
                                       color: Colors.white,
                                     )
@@ -224,11 +420,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Divider(),
-                      SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 10,
                       ),
                       SingleChildScrollView(
@@ -238,126 +434,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "Location",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.white),
-                              ),
                               SizedBox(
-                                height: 20,
-                                child: Switch(
-                                  value: locationvalue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      locationvalue = value;
-                                    });
-                                  },
-                                  activeTrackColor: Colors.red,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                child: Text(
+                                  "Privacy Policy",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Divider(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Notification",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 20,
-                                child: Switch(
-                                  value: notificationvalue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      notificationvalue = value;
-                                    });
-                                  },
-                                  activeTrackColor: Colors.red,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Divider(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Country",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.white),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Turkey",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_outlined,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Divider(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Privacy Policy",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.white),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios_outlined,
@@ -367,10 +454,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   ),
                 )
