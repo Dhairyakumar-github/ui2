@@ -44,44 +44,49 @@ class _CountryScreenState extends State<CountryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          children: [
-            const SizedBox(height: 30),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            children: [
+              // const SizedBox(height: 10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                          SizedBox(width: 10),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            child: Text(
-                              "Country",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
+                    Flexible(
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                            SizedBox(width: 10),
+                            Flexible(
+                              child: Text(
+                                "Country",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     GestureDetector(
+                      // onTap: () => Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             const MovieSearchScreen())),
                       child: Container(
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 188, 168, 168),
@@ -105,47 +110,47 @@ class _CountryScreenState extends State<CountryScreen> {
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            // ListView to show the languages
-            Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  final data = countryList[index];
-                  return GestureDetector(
-                    onTap: () {
-                      // Update selected index and pass the value back
-                      setState(() {
-                        selectedCountryIndex = index;
-                      });
-                      // Pass the selected language and index back to the previous screen
-                      Navigator.pop(context,
-                          {'country': data, 'index2': selectedCountryIndex});
-                    },
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        data,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: selectedCountryIndex == index
-                              ? const Color.fromARGB(255, 255, 255, 255)
-                              : const Color.fromARGB(255, 122, 119, 119),
+              const SizedBox(height: 20),
+              // ListView to show the languages
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final data = countryList[index];
+                    return GestureDetector(
+                      onTap: () {
+                        // Update selected index and pass the value back
+                        setState(() {
+                          selectedCountryIndex = index;
+                        });
+                        // Pass the selected language and index back to the previous screen
+                        Navigator.pop(context,
+                            {'country': data, 'index2': selectedCountryIndex});
+                      },
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          data,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: selectedCountryIndex == index
+                                ? const Color.fromARGB(255, 255, 255, 255)
+                                : const Color.fromARGB(255, 122, 119, 119),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-                itemCount: countryList.length,
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                  itemCount: countryList.length,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

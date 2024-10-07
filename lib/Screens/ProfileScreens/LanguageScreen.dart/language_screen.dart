@@ -46,44 +46,49 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          children: [
-            const SizedBox(height: 30),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            children: [
+              // const SizedBox(height: 10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                          SizedBox(width: 10),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            child: Text(
-                              "Language",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
+                    Flexible(
+                      child: GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                            SizedBox(width: 10),
+                            Flexible(
+                              child: Text(
+                                "Language",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     GestureDetector(
+                      // onTap: () => Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             const MovieSearchScreen())),
                       child: Container(
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 188, 168, 168),
@@ -107,47 +112,59 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            // ListView to show the languages
-            Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  final data = _languageList[index];
-                  return GestureDetector(
-                    onTap: () {
-                      // Update selected index and pass the value back
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                      // Pass the selected language and index back to the previous screen
-                      Navigator.pop(
-                          context, {'language': data, 'index': selectedIndex});
-                    },
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        data,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 20,
+              const SizedBox(height: 20),
+              // ListView to show the languages
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final data = _languageList[index];
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // Update selected index and pass the value back
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                            // Pass the selected language and index back to the previous screen
+                            Navigator.pop(context,
+                                {'language': data, 'index': selectedIndex});
+                          },
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              data,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: selectedIndex == index
+                                    ? const Color.fromARGB(255, 255, 255, 255)
+                                    : const Color.fromARGB(255, 122, 119, 119),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.join_right_rounded,
                           color: selectedIndex == index
                               ? const Color.fromARGB(255, 255, 255, 255)
                               : const Color.fromARGB(255, 122, 119, 119),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-                itemCount: _languageList.length,
+                          size: 14,
+                        )
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                  itemCount: _languageList.length,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

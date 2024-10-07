@@ -45,19 +45,19 @@ class _OnBoadingScreenState extends State<OnBoadingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 20,
-                height: 20,
+                width: 15,
+                height: 15,
                 decoration: BoxDecoration(
                   color: initialPosition == 0 ? Colors.red : Colors.white,
                   shape: BoxShape.circle,
                 ),
               ),
               const SizedBox(
-                width: 10,
+                width: 7,
               ),
               Container(
-                width: 20,
-                height: 20,
+                width: 15,
+                height: 15,
                 decoration: BoxDecoration(
                   color: initialPosition == 1 ? Colors.red : Colors.white,
                   shape: BoxShape.circle,

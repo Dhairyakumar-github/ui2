@@ -36,8 +36,8 @@ class _CustomSwitchState extends State<CustomSwitch>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 60));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 60));
     _circleAnimation = AlignmentTween(
             begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
             end: widget.value ? Alignment.centerLeft : Alignment.centerRight)
@@ -62,8 +62,8 @@ class _CustomSwitchState extends State<CustomSwitch>
                 : widget.onChanged!(false);
           },
           child: Container(
-            width: 70.0,
-            height: 35.0,
+            width: 50.0,
+            height: 30.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               // I commented here.
@@ -89,13 +89,13 @@ class _CustomSwitchState extends State<CustomSwitch>
                 children: <Widget>[
                   _circleAnimation.value == Alignment.centerRight
                       ? Padding(
-                          padding: const EdgeInsets.only(left: 34.0, right: 0),
+                          padding: const EdgeInsets.only(left: 20.0, right: 0),
                           child: Text(
                             widget.activeText,
                             style: TextStyle(
                                 color: widget.activeTextColor,
                                 fontWeight: FontWeight.w900,
-                                fontSize: 16.0),
+                                fontSize: 14.0),
                           ),
                         )
                       : Container(),
@@ -104,13 +104,13 @@ class _CustomSwitchState extends State<CustomSwitch>
                     child: Container(
                       width: 25.0,
                       height: 25.0,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
                     ),
                   ),
                   _circleAnimation.value == Alignment.centerLeft
                       ? Padding(
-                          padding: const EdgeInsets.only(left: 0, right: 34.0),
+                          padding: const EdgeInsets.only(left: 8, right: 14.0),
                           child: Text(
                             widget.inactiveText,
                             style: TextStyle(
